@@ -1,15 +1,13 @@
-const express = require('express');
-const app = express();
 const dotenv = require('dotenv'); 
 dotenv.config();
 
+// Importar la app de Express ya configurada
+const app = require('./src/app');
+
+// Definir puerto desde .env o por defecto
 const PORT = process.env.PORT || 3000;
-const HOST= process.env.HOST || 'localhost';
-const routes = require('./src/routes/routes.js');
-app.use(express.json());
 
-app.get('/',routes)
-
-app.listen(PORT,HOST,() => {
-    console.log(`servidor coriendo en http://${HOST}:${PORT}/`);
-})
+// Iniciar el servidor
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+});
