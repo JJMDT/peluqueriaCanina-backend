@@ -8,6 +8,6 @@ const app = require('./src/app');
 const PORT = process.env.PORT || 3000;
 
 // Iniciar el servidor
-app.listen(PORT, () => {
+app.listen(PORT, (req,res) => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
