@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
  
 dotenv.config();
 
+//configuracion sequelize, documentacion https://sequelize.org/docs/v6/getting-started/ opcion 3
 const sequelizeConfig = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
