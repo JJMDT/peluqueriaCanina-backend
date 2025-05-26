@@ -12,6 +12,7 @@ const bunyanLog = bunyan.createLogger({ name: 'app' })
 
 // Definir puerto desde .env o por defecto
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST;
 
 //funcion para verificar la conexión de la la base de datos
 const connectdB = async () => {
@@ -24,13 +25,13 @@ const syncModels = async () => {
   await sequelizeConfig.sync();
   const allSchemas = (await sequelizeConfig.showAllSchemas()).map(el => el[`Tables_in_${process.env.DB_NAME}`])
   bunyanLog.info(`Todos los schemas en la  Data Base ${process.env.DB_NAME}: ${allSchemas.join(', ')}`)
-  bunyanLog.info('Models Data Base OK');
+  bunyanLog.info('Modelos(Tablas) Data Base OK');
 }
 
 // Iniciar el servidor
 const startExpress = async () => {
   app.listen(PORT, () => {
-    bunyanLog.info(`Servidor corriendo en http://localhost:${PORT}`);
+    bunyanLog.info(`Servidor corriendo en http://${HOST}:${PORT}`);
   });
 }
 
