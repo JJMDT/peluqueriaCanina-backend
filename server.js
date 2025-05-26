@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const { sequelizeConfig } = require('./src/config/db');
 const bunyan = require('bunyan')
 
+//traigo todos los models
 require('./src/models/index')
 
 dotenv.config();
