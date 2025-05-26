@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const routes = require('./routes/routes');
+const userRoutes = require('./routes/user')
 
 // Inicializamos la app de Express
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // === Rutas ===
 app.use('/api', routes);
+app.use('/user', userRoutes)
 
 // === Middleware de manejo de errores personalizado (opcional) ===
 // Podés agregarlo después cuando tengas errores centralizados
