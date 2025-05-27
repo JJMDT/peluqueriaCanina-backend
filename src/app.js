@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // === Rutas ===
 app.use('/api', routes);
-app.use('/user', userRoutes)
+app.use('/users', userRoutes)
 
 // === Middleware de manejo de errores personalizado (opcional) ===
 // Podés agregarlo después cuando tengas errores centralizados
