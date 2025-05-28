@@ -39,8 +39,8 @@ const startExpress = async () => {
 
 const startServer = async () => {
   try {
-    // await connectdB()
-    // await syncModels()
+    await connectdB()
+    await syncModels()
     await startExpress()
   } catch (error) {
     console.log('Error al iniciar', error)
