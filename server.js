@@ -38,12 +38,17 @@ const startExpress = async () => {
 
 
 const startServer = async () => {
+  let dbConnected = true;
   try {
-    await connectdB()
-    await syncModels()
-    await startExpress()
+    await connectdB();
+    await syncModels();
   } catch (error) {
-    console.log('Error al iniciar', error)
+    dbConnected = false;
+    bunyanLog.error('Error al conectar o sincronizar con la base de datos:', error.message);
+  }
+  await startExpress();
+  if (!dbConnected) {
+    bunyanLog.warn('El servidor Express está funcionando, pero hubo un problema con la base de datos.');
   }
 }
 
