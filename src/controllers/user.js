@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
   const { name, lastName, dni, email, password } = req.body;
@@ -27,12 +28,15 @@ const register = async (req, res) => {
         .json({ status: "error 400", message: "Email ya registrado" });
     }
 
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
     const user = await User.create({
       name,
       lastName,
       dni,
       email,
-      password,
+      password: hashedPassword,
     });
     console.log("Usuario registrado:", user);
 
