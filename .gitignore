@@ -8,6 +8,8 @@ pnpm-debug.log*
 # Environment variables
 .env
 .env.*.local
+pruebas.http
+
 
 # Logs
 logs/
