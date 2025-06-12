@@ -1,34 +1,32 @@
+// se crea la base directamente desde acá
 const { DataTypes } = require('sequelize')
 const { sequelizeConfig } = require('../config/db')
 
 const Servicio = sequelizeConfig.define(
-    "Servicio", {
+    "Servicio",
+    {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
-            primaryKey: true
+            primaryKey: true,
         },
-        nombre: {
+        name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
-        descripcion: {
-            type: DataTypes.TEXT,
-            allowNull: true
+        description: {
+            type: DataTypes.STRING,
+            allowNull: true, 
         },
-        duracion: {
-            type: DataTypes.INTEGER, // duración en minutos
-            allowNull: false
+        price: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
         },
-        precio: {
-            type: DataTypes.DECIMAL(10, 2),
-            allowNull: false
-        }
     },
     {
         timestamps: true,
-        tableName: 'servicios'
+        tableName: "servicios",
     }
-)
+);
 
-module.exports = Servicio; 
+module.exports = Servicio;
