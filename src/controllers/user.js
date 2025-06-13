@@ -63,7 +63,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const turno = async(req,res) => {
-  const {fecha, hora, userId, servicioId} = req.body;
+  const {fecha, hora, nombreMascota,telefono, userId, servicioId} = req.body;
 
   if (!fecha || !hora || !userId || !servicioId) {
     return res.status(400).json({
@@ -76,6 +76,8 @@ const turno = async(req,res) => {
     const nuevoTurno = await Turno.create({
       fecha,
       hora,
+      nombreMascota,
+      telefono: telefono ? telefono :null,
       userId,
       servicioId
     });

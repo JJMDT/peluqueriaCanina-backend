@@ -18,6 +18,14 @@ const Turno = sequelizeConfig.define(
         type :DataTypes.TIME,
         allowNull:false
       },
+      nombreMascota:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+      telefono: {
+        type: DataTypes.STRING,
+        allowNull: true
+      },
 
       userId: {
         type: DataTypes.UUID,
