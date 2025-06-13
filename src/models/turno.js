@@ -1,13 +1,14 @@
 const {DataTypes} = require('sequelize')
 const {sequelizeConfig} = require('../config/db')
 const User = require('./user')
+const Servicio = require('./servicio')
 
 const Turno = sequelizeConfig.define(
     "Turno", {
         id:{
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
-            primaryKey:true
+            primaryKey: true
         },
       fecha:{
         type: DataTypes.DATEONLY,
@@ -18,17 +19,17 @@ const Turno = sequelizeConfig.define(
         allowNull:false
       },
 
-      userId:{
+      userId: {
         type: DataTypes.UUID,
-        allowNull:false,
+        allowNull: false,
         references: {
-            model: User,
-            key:'id'
-        }
+          model: User,
+          key: 'id',
+        },
       },
       servicioId: {
         type: DataTypes.UUID,
-        allowNull: false,
+        allowNull:false,
         references: {
             model: Servicio,
             key: 'id'
@@ -41,10 +42,10 @@ const Turno = sequelizeConfig.define(
     }
 )
 
-Turno.belongsTo(User, {foreignKey:'userId'})
-User.hasMany(Turno, {foreignKey: 'userId'})
+Turno.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+User.hasMany(Turno, { foreignKey: 'userId', onDelete: 'CASCADE' });
 
-Turno.belongsTo(Servicio, {foreignKey: 'servicioId'})
-Servicio.hasMany(Turno, {foreignKey: 'servicioId'})
+Turno.belongsTo(Servicio, { foreignKey: 'servicioId', onDelete: 'CASCADE' });
+Servicio.hasMany(Turno, { foreignKey: 'servicioId', onDelete: 'CASCADE' });
 
 module.exports = Turno;
