@@ -16,4 +16,6 @@ const verifyToken = (req, res, next) => {
         return res.status(403).json({ status: 'error 403', message: 'Token inválido' });
     }
 }
-module.exports = verifyToken;
+
+
+module.exports = {verifyToken};
