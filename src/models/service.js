@@ -2,8 +2,8 @@
 const { DataTypes } = require('sequelize')
 const { sequelizeConfig } = require('../config/db')
 
-const Servicio = sequelizeConfig.define(
-    "Servicio",
+const Service = sequelizeConfig.define(
+    "Service",
     {
         id: {
             type: DataTypes.UUID,
@@ -25,8 +25,8 @@ const Servicio = sequelizeConfig.define(
     },
     {
         timestamps: true,
-        tableName: "servicios",
+        tableName: "service",
     }
 );
 
-module.exports = Servicio;
+module.exports = Service;
