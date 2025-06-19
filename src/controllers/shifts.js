@@ -58,16 +58,16 @@ const createShift = async (req, res) => {
 
       // generamos el codigo QR con los datos del turno (definimos un objeto con los datos que queremos incluir en el QR)
       const qrDataPayload = {
-        idShift: newShift.id,
+        idTurno: newShift.id,
         name: name,
         lastName:lastName,
         dni: dni,
         email: email,
         serviceName: serviceName,
         servicePrice: servicePrice,
+        petName: newShift.petName,
         date: newShift.date,
         time: newShift.time,
-        petName: newShift.petName,
       }
       // convertimos el objeto a JSON y genemos el codigo QR
       const qrDataString = JSON.stringify(qrDataPayload);
