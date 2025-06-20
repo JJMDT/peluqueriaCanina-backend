@@ -94,12 +94,13 @@ const patchUserById = async (req, res) => {
       error.name = 404;
       throw error;
     }
+    const hashedPassword = await bcrypt.hash(password, 10);
     await findUser.update({
       name,
       lastName,
       dni,
       email,
-      password,
+      password: hashedPassword
     })
     bunyanLog.info(`User id:${findUser.id}`)
     return res.status(200).json({ status: "success 200", message: `Editado Usuario id:${findUser.id}`, data: findUser })
