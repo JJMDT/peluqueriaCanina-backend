@@ -50,7 +50,7 @@ const register = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      include: { // con esto le digo que inclulle lo que tiene de la relacion con Shift
+      include: { // con esto le digo que incluye lo que tiene de la relacion con Shift
         model: Shift
       },
     });
