@@ -2,6 +2,7 @@ const {DataTypes} = require('sequelize')
 const {sequelizeConfig} = require('../config/db')
 const User = require('./user')
 const Service = require('./service')
+const VALID_TIMES  = require("../utils/timeSlots");
 
 const Shift = sequelizeConfig.define(
     "Shift", {
@@ -15,8 +16,11 @@ const Shift = sequelizeConfig.define(
         allowNull:false
       },
       time:{
-        type :DataTypes.TIME,
-        allowNull:false
+        type :DataTypes.STRING,
+        allowNull:false,
+        validate: {
+          isIn: [VALID_TIMES]
+        }
       },
       petName:{
         type: DataTypes.STRING,
