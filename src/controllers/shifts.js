@@ -106,5 +106,37 @@ const createShift = async (req, res) => {
   }
 };
 
+//metodo para obtener los horarios disponibles para una fecha seleccionada
+const getAvailableTimes = async (req, res) => {
+  try {
+    const { date } = req.query;
+    if (!date) {
+      return res.status(400).json({
+        status: "error 400",
+        message: "Fecha es requerida",
+      });
+    }
+    const existShifts = await Shift.findAll({
+      where: { date },
+      attributes: ["time"],
+    });
+    const tokenTimes = existShifts.map((shift) => shift.time);
+    const availablesTime = VALID_TIMES.filter(
+      (time) => !tokenTimes.includes(time)
+    );
 
-module.exports = { createShift };
+    return res.status(200).json({
+      status: "success 200",
+      message: "Horarios disponibles para la fecha seleccionada",
+      data: availablesTime,
+    });
+
+  } catch (error) {
+    console.error("Error al obtener horarios disponibles:", error);
+    res.status(500).json({
+      status: "error 500",
+      message: error.message,
+    });
+  }
+}
+module.exports = { createShift,getAvailableTimes };
