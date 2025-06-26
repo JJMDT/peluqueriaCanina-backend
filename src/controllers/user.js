@@ -50,7 +50,7 @@ const register = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll({
-      include: { // con esto le digo que inclulle lo que tiene de la relacion con Shift
+      include: { // con esto le digo que incluye lo que tiene de la relacion con Shift
         model: Shift
       },
     });
@@ -94,13 +94,16 @@ const patchUserById = async (req, res) => {
       error.name = 404;
       throw error;
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
+    let hashedPassword = ""
+    if (password) {
+      hashedPassword = await bcrypt.hash(password, 10);
+    }
     await findUser.update({
       name,
       lastName,
       dni,
       email,
-      password: hashedPassword
+      password: hashedPassword ? hashedPassword : findUser.password
     })
     bunyanLog.info(`User id:${findUser.id}`)
     return res.status(200).json({ status: "success 200", message: `Editado Usuario id:${findUser.id}`, data: findUser })
