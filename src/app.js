@@ -12,7 +12,29 @@ const app = express();
 // === Middlewares globales ===
 
 // configuracion cors
-app.use(cors());
+// app.use(cors());
+const allowedOrigins = [
+  'http://localhost:4200', // desarrollo local Angular
+  'https://guau-que-corte.vercel.app', // deploy frontend en Vercel
+  'https://main.d6v4rbr3cos5b.amplifyapp.com' // deploy frontend en AWS Amplify
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Permitir requests sin origen (ej: Postman, curl)
+    if (!origin){
+        return callback(null, true);
+    } 
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Origen ${origin} no permitido por CORS`));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: false // Cambiar a true si usás cookies o sesiones
+}));
 
 // Permite recibir y procesar JSON en el body (POST, PUT, etc.)
 app.use(express.json());
